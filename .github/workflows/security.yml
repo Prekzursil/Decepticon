@@ -173,3 +173,6 @@ jobs:
           fail-on-severity: high
           comment-summary-in-pr: on-failure
           retry-on-snapshot-warnings: true
+          # allow-ghsas for the documented langgraph residual (see
+          # .github/dependency-review-config.yml)
+          config-file: .github/dependency-review-config.yml
