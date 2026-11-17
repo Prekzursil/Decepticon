@@ -9,3 +9,17 @@
 # semgrep 1.169.0 pins click~=8.1.8, so the workspace cannot resolve the
 # PYSEC-2026-2132 fix (>=8.3.3). Remove when Semgrep permits it.
 PYSEC-2026-2132
+# --------------------------------------------------------------------
+# 2026-11-17 residual risk documentation (fleet standard: fixes exist but
+# are uninstallable due to an upstream pin conflict):
+#   - opentelemetry-api 1.37.0 CVE-2026-114603 (fix 1.45.1),
+#     CVE-2026-126360 (fix 1.45.2): langgraph-cli[inmem] (required by
+#     decepticon) pins opentelemetry-api>=1.37.0,<1.38.dev0 through
+#     langgraph-api, while semgrep>=1.95 (lint extra in the same lock)
+#     requires >=1.45.2. Jointly unsatisfiable; revisit on the next
+#     langgraph-cli/langgraph-api release.
+#   - langgraph-api 0.10.3 CVE-2026-118668 (fix 0.15.0): langgraph-api
+#     0.15 requires the newer opentelemetry family blocked above.
+CVE-2026-114603
+CVE-2026-126360
+CVE-2026-118668
