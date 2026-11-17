@@ -1,0 +1,11 @@
+# Dependency review configuration.
+#
+# allow-ghsas: the ONLY accepted exception, mirroring .pip-audit-ignore:
+# langgraph-api < 0.15.0 carries GHSA-4hm6-w6qq-w73v (and opentelemetry-api
+# < 1.45.2 carries the CVEs listed there), but the fixed releases cannot be
+# installed in this workspace: langgraph-cli[inmem] pins
+# opentelemetry-api>=1.37.0,<1.38.dev0 while semgrep>=1.95 (lint extra,
+# same lock) requires >=1.45.2 - jointly unsatisfiable. Remove this
+# exception as soon as langgraph relaxes its opentelemetry pin.
+allow-ghsas:
+  - GHSA-4hm6-w6qq-w73v
