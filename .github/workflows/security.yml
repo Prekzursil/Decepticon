@@ -4,7 +4,9 @@ name: Security
 # the 18-tool "comprehensive" arsenal with a focused, high-signal set whose
 # findings all land in the Security tab as SARIF:
 #
-#   * CodeQL            deep SAST (Python + JS/TS), security-and-quality queries
+#   * CodeQL           moved to .github/workflows/codeql.yml (advanced
+#                      fleet config: security-extended + security-and-quality,
+#                      python + js/ts + actions matrix, weekly schedule)
 #   * Semgrep           repo-specific invariants (.semgrep/decepticon-rules.yml),
 #                       hard gate on ERROR-severity findings
 #   * Trivy             dependency CVEs (fs) + IaC/Dockerfile misconfig (config)
@@ -46,27 +48,6 @@ permissions:
   contents: read
 
 jobs:
-  codeql:
-    name: CodeQL (${{ matrix.language }})
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    permissions:
-      contents: read
-      security-events: write
-      actions: read
-    strategy:
-      fail-fast: false
-      matrix:
-        language: [python, javascript-typescript]
-    steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
-      - uses: github/codeql-action/init@dd903d2e4f5405488e5ef1422510ee31c8b32357 # v3.36.2
-        with:
-          languages: ${{ matrix.language }}
-          queries: security-and-quality
-      - uses: github/codeql-action/analyze@dd903d2e4f5405488e5ef1422510ee31c8b32357 # v3.36.2
-        with:
-          category: "/language:${{ matrix.language }}"
 
   semgrep:
     name: Semgrep (repo rules — hard gate)
@@ -192,3 +173,6 @@ jobs:
           fail-on-severity: high
           comment-summary-in-pr: on-failure
           retry-on-snapshot-warnings: true
+          # allow-ghsas for the documented langgraph residual (see
+          # .github/dependency-review-config.yml)
+          config-file: .github/dependency-review-config.yml
