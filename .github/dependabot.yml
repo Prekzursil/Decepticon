@@ -1,0 +1,35 @@
+version: 2
+updates:
+  # Python workspace root (shared tooling: ruff/basedpyright/pytest/coverage)
+  - package-ecosystem: pip
+    directory: "/"
+    schedule:
+      interval: weekly
+  # Published packages
+  - package-ecosystem: pip
+    directory: "/packages/decepticon"
+    schedule:
+      interval: weekly
+  - package-ecosystem: pip
+    directory: "/packages/decepticon-core"
+    schedule:
+      interval: weekly
+  - package-ecosystem: pip
+    directory: "/packages/decepticon-sdk"
+    schedule:
+      interval: weekly
+  # Node telemetry gateway
+  - package-ecosystem: npm
+    directory: "/telemetry-gateway"
+    schedule:
+      interval: weekly
+  # Root lockfile (docs/tooling JS)
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+  # Workflow actions
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
