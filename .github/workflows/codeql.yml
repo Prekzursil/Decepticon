@@ -50,7 +50,7 @@ jobs:
           pip install -e packages/decepticon-core -e packages/decepticon-sdk -e packages/decepticon
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@9b202ad2d9e4c2260e9f053b6c1c93fd76554259 # v4.30.4
+        uses: github/codeql-action/init@dd903d2e4f5405488e5ef1422510ee31c8b32357 # v3.36.2
         with:
           languages: ${{ matrix.language }}
           # security-and-quality strictly subsumes the default suite and
@@ -58,6 +58,6 @@ jobs:
           queries: security-extended,security-and-quality
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@9b202ad2d9e4c2260e9f053b6c1c93fd76554259 # v4.30.4
+        uses: github/codeql-action/analyze@dd903d2e4f5405488e5ef1422510ee31c8b32357 # v3.36.2
         with:
           category: "/language:${{ matrix.language }}"
