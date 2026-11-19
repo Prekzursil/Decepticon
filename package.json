@@ -21,6 +21,10 @@
     "prisma": "^7.7.0"
   },
   "overrides": {
+    "katex": "^0.18.2",
+    "@ts-morph/common": {
+      "minimatch": "^11.0.1"
+    },
     "fast-uri": "^3.1.2",
     "langsmith": "0.6.3",
     "@langchain/core": {
